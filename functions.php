@@ -13,13 +13,23 @@ function database()
     $password = "";
     $database = "gab";
 
+    $db = new PDO(
+        'mysql:host=mysql;dbname=gestion_absence',  // 'mysql' = Docker service name
+        'root',                                     // Username (matches docker-compose.yml)
+        'rootpass',                                 // Password (matches docker-compose.yml)
+        array(
+            PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES UTF8',
+            PDO::ATTR_ERRMODE => PDO::ERRMODE_SILENT
+        )
+    );
+    /*
     $db = new PDO("mysql:host=" . $host . ";dbname=" . $database, $username, $password,
         array(
             PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES UTF8',
             PDO::ATTR_ERRMODE => PDO::ERRMODE_SILENT
         )
     );
-
+    */
     return $db;
 
 }

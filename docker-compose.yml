@@ -8,12 +8,12 @@ services:
     volumes:
       - .:/var/www/html  # Maps current dir to Apache root
     depends_on:
-      - mysql
+      - mysql  # Must match the service name below
 
-  mysql:
+  mysql:  # <- This name becomes the hostname "mysql"
     image: mysql:8.0
     environment:
-      MYSQL_ROOT_PASSWORD: rootpass
+      MYSQL_ROOT_PASSWORD: rootpass  # Must match PHP code
       MYSQL_DATABASE: gestion_absence
     volumes:
-      - ./gab.sql:/docker-entrypoint-initdb.d/init.sql  # Auto-imports your SQL
+      - ./gab.sql:/docker-entrypoint-initdb.d/init.sql

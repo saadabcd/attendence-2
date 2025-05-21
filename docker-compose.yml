@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  php-app:
+    build: .
+    ports:
+      - "8000:80"
+    volumes:
+      - .:/var/www/html  # Maps current dir to Apache root
+    depends_on:
+      - mysql
+
+  mysql:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpass
+      MYSQL_DATABASE: gestion_absence
+    volumes:
+      - ./gab.sql:/docker-entrypoint-initdb.d/init.sql  # Auto-imports your SQL
